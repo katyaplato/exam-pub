@@ -20,5 +20,7 @@ public class ProductService {
         return allDrinks;
     }
 
-    public
+//    public Product buyProduct(Product product){
+//
+//    }
 }

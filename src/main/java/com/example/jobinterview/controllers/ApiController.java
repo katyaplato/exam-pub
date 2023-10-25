@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-public class WebController {
+public class ApiController {
     @GetMapping("/users")
     public Iterable<User> getAllUsers(){
         return;

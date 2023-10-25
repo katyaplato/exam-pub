@@ -6,7 +6,7 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Table(name = "users")
+@Table(name = "USERS")
 @Data
 public class User {
     @Id
@@ -18,6 +18,6 @@ public class User {
     private double pocket;
     @Enumerated
     private Role role;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "USER", cascade = CascadeType.ALL)
     private List<Order> orders;
 }

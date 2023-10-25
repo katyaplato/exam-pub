@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "ORDERS")
 @Data
 public class Order {
     @Id
@@ -14,6 +14,6 @@ public class Order {
     private int amount;
     private double price;
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "USER_ID")
     private User user;
 }

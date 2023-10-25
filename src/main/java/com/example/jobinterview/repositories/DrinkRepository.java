@@ -1,9 +1,9 @@
 package com.example.jobinterview.repositories;
 
-import com.example.jobinterview.models.Drink;
+import com.example.jobinterview.models.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DrinkRepository extends JpaRepository<Drink, Long> {
+public interface DrinkRepository extends JpaRepository<Product, Long> {
 }

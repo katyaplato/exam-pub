@@ -16,6 +16,8 @@ public class User {
     private boolean isActive;
     private boolean isAdult;
     private double pocket;
+    @Enumerated
+    private Role role;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Order> orders;
 }

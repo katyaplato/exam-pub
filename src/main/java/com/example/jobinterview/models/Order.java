@@ -14,6 +14,6 @@ public class Order {
     private int amount;
     private double price;
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "user_id")
     private User user;
 }

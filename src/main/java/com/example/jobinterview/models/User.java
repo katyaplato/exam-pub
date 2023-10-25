@@ -18,6 +18,6 @@ public class User {
     private double pocket;
     @Enumerated
     private Role role;
-    @OneToMany(mappedBy = "USER", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Order> orders;
 }

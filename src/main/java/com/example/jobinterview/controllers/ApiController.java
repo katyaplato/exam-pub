@@ -1,14 +1,14 @@
 package com.example.jobinterview.controllers;
 
-import com.example.jobinterview.models.User;
+import com.example.jobinterview.dtos.UserDTO;
 import com.example.jobinterview.services.UserService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Objects;
 
 
 @RestController
@@ -22,8 +22,8 @@ public class ApiController {
     }
 
     @GetMapping("/users/{userId}")
-    public ResponseEntity<?> getUserById(@PathVariable("userId") Long id){
-        return userService.getUserById(id);
+    public UserDTO getUserById(@PathVariable("userId") Long id){
+        return new UserDTO(userService.getUserById(id).getBody());
     }
 
 }

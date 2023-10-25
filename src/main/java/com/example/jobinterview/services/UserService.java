@@ -22,11 +22,12 @@ public class UserService {
         return allUsers;
     }
 
-    public ResponseEntity<?> getUserById(Long id) {
+    public ResponseEntity<User> getUserById(Long id) {
         Optional<User> maybeUser = userRepository.findById(id);
         if (maybeUser.isEmpty()) {
             return ResponseEntity.status(404).build();
         }
-        return ResponseEntity.status(200).body(maybeUser);
+        User user = maybeUser.get();
+        return ResponseEntity.status(200).body(user);
     }
 }

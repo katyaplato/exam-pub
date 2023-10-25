@@ -15,7 +15,7 @@ public class UserDTO {
     private double pocket;
     private List<Order> orders;
 
-    UserDTO (User user){
+    public UserDTO(User user){
         this.id = user.getId();
         this.name = user.getName();
         this.isActive = user.isActive();

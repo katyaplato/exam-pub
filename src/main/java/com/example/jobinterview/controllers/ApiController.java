@@ -1,6 +1,7 @@
 package com.example.jobinterview.controllers;
 
 import com.example.jobinterview.dtos.UserDTO;
+import com.example.jobinterview.models.Drink;
 import com.example.jobinterview.services.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,11 @@ public class ApiController {
     @GetMapping("/users/{userId}")
     public UserDTO getUserById(@PathVariable("userId") Long id){
         return new UserDTO(userService.getUserById(id).getBody());
+    }
+
+    @GetMapping("/drinks")
+    public List<Drink> getAllDrinks(){
+        return
     }
 
 }

@@ -15,6 +15,7 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     OrderRepository orderRepository;
 
+    @Override
     public List<SummaryAllDTO> getSummaryAll() {
         List<Order> allOrders = orderRepository.findAll();
         List<SummaryAllDTO> summary = new ArrayList<>();

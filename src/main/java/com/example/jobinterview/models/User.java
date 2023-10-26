@@ -8,6 +8,8 @@ import java.util.List;
 @Entity
 @Table(name = "USERS")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class User {
     @Id
@@ -22,7 +24,4 @@ public class User {
     private Role role;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Order> orders;
-
-    public User() {
-    }
 }

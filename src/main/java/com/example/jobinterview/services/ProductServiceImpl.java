@@ -56,7 +56,7 @@ public class ProductServiceImpl implements ProductService {
 
         Order order = Order
                 .builder()
-                .productName(product.getProductName())
+                .product(product)
                 .amount(amount)
                 .price(product.getPrice() * amount)
                 .user(user)

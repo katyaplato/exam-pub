@@ -16,7 +16,6 @@ import java.util.List;
 public class ApiController {
 
     UserServiceImpl userService;
-
     ProductServiceImpl productService;
 
     @GetMapping("/hello")
@@ -34,7 +33,7 @@ public class ApiController {
         return new UserDTO(userService.getUserById(id).getBody());
     }
 
-    @GetMapping("/drinks")
+    @GetMapping("/drink-menu")
     public List<Product> getAllDrinks() {
         return productService.getAllDrinks();
     }

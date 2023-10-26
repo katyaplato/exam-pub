@@ -11,13 +11,13 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String productName;
     private int amount;
     private double price;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
-    public Order() {
-    }
 }

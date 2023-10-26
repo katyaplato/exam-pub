@@ -2,6 +2,7 @@ package com.example.jobinterview.services;
 
 import com.example.jobinterview.dtos.SummaryAllDTO;
 import com.example.jobinterview.dtos.SummaryProductDTO;
+import com.example.jobinterview.dtos.SummaryUserDTO;
 import com.example.jobinterview.models.Order;
 import com.example.jobinterview.models.Product;
 import com.example.jobinterview.models.User;
@@ -55,5 +56,25 @@ public class OrderServiceImpl implements OrderService {
             productSummary.add(summaryProductDTO);
         }
         return productSummary;
+    }
+
+    @Override
+    public List<SummaryUserDTO> getSummaryUser() {
+        List<Order> allOrders = orderRepository.findAll();
+        List<SummaryUserDTO> summaryUser = new ArrayList<>();
+
+        for (Order order : allOrders) {
+            User user = order.getUser();
+            Product product = order.getProduct();
+
+            SummaryUserDTO summaryUserDTO = SummaryUserDTO
+                    .builder()
+                    .userId(user.getId())
+                    .productName(product.getProductName())
+                    .price(order.getPrice())
+                    .build();
+            summaryUser.add(summaryUserDTO);
+        }
+        return summaryUser;
     }
 }

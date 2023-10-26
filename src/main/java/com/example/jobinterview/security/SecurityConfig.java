@@ -9,21 +9,24 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("api/**")
-                .hasRole("USER")
-                .requestMatchers("api/summary/**")
-                .hasRole("WAITER")
-                .and()
-                .httpBasic();
+                .authorizeRequests((authorizeRequests) ->
+                        authorizeRequests
+                                .requestMatchers("/api/auth/**").permitAll()
+                                .requestMatchers("/**").hasRole("USER")
+                                .requestMatchers("/api/summary/**")
+                                .hasRole("WAITER")
+                )
+                .httpBasic(withDefaults());
         return http.build();
     }
 

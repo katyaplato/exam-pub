@@ -22,13 +22,14 @@ public class AuthenticationService {
             throw new Error("Username already exists");
         }
 
-
-        User user = new User();
-        user.setName(registrationDTO.getName());
-        user.setPassword(registrationDTO.getPassword());
-        user.setAdult(registrationDTO.isAdult());
-        user.setPocket(registrationDTO.getPocket());
-
+        User user = User
+                .builder()
+                .name(registrationDTO.getName())
+                .password(registrationDTO.getPassword())
+                .isAdult(registrationDTO.isAdult())
+                .pocket(registrationDTO.getPocket())
+                .role(registrationDTO.getRole())
+                .build();
 
         userRepository.save(user);
     }

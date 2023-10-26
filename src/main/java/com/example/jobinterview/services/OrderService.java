@@ -10,4 +10,5 @@ public interface OrderService {
     List<SummaryAllDTO> getSummaryAll();
     List<SummaryProductDTO> getSummaryProduct();
     List<SummaryUserDTO> getSummaryUser();
+    String buyProduct(Long userId, Long productId, int amount);
 }

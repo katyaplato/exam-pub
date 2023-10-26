@@ -7,16 +7,21 @@ import com.example.jobinterview.models.Order;
 import com.example.jobinterview.models.Product;
 import com.example.jobinterview.models.User;
 import com.example.jobinterview.repositories.OrderRepository;
+import com.example.jobinterview.repositories.ProductRepository;
+import com.example.jobinterview.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class OrderServiceImpl implements OrderService {
     OrderRepository orderRepository;
+    UserRepository userRepository;
+    ProductRepository productRepository;
 
     @Override
     public List<SummaryAllDTO> getSummaryAll() {
@@ -76,5 +81,43 @@ public class OrderServiceImpl implements OrderService {
             summaryUser.add(summaryUserDTO);
         }
         return summaryUser;
+    }
+
+    @Override
+    public String buyProduct(Long userId, Long productId, int amount) {
+
+        Optional<User> maybeUser = userRepository.findById(userId);
+        Optional<Product> maybeProduct = productRepository.findById(productId);
+
+        if (maybeUser.isEmpty()) {
+            throw new Error("A User with such ID does not exist.");
+        } else if (maybeProduct.isEmpty()) {
+            throw new Error("A drink with such ID does not exist.");
+        }
+
+        Product product = maybeProduct.get();
+        User user = maybeUser.get();
+
+        if (product.isForAdult()) {
+            if (!user.isAdult()) {
+                throw new Error("You are not allowed to drink alcohol!");
+            } else if (user.getPocket() < (product.getPrice() * amount)) {
+                throw new Error("You cannot afford it.");
+            }
+        }
+
+        user.setPocket(user.getPocket() - product.getPrice());
+
+        Order order = Order
+                .builder()
+                .product(product)
+                .amount(amount)
+                .price(product.getPrice() * amount)
+                .user(user)
+                .build();
+
+        user.getOrders().add(order);
+
+        return "Have a nice evening.";
     }
 }

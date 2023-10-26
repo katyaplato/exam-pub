@@ -19,17 +19,17 @@ public class SummaryController {
     OrderService orderService;
 
     @GetMapping("/all")
-    public List<SummaryAllDTO> getAllSummary(){
+    public List<SummaryAllDTO> getAllSummary() {
         return orderService.getSummaryAll();
     }
 
     @GetMapping("/product")
-    public List<SummaryProductDTO> getProductSummary(){
+    public List<SummaryProductDTO> getProductSummary() {
         return orderService.getSummaryProduct();
     }
 
     @GetMapping("/user")
-    public List<SummaryUserDTO> getSummaryUser(){
+    public List<SummaryUserDTO> getSummaryUser() {
         return orderService.getSummaryUser();
     }
 }

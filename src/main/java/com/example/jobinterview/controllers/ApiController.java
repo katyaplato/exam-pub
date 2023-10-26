@@ -23,20 +23,8 @@ public class ApiController {
         return "Hello Kate:)";
     }
 
-    @GetMapping("/users")
-    public List<?> getAllUsers() {
-        return userService.getAllUsers();
-    }
 
-    @GetMapping("/users/{userId}")
-    public UserDTO getUserById(@PathVariable("userId") Long id) {
-        return new UserDTO(userService.getUserById(id).getBody());
-    }
 
-    @GetMapping("/drink-menu")
-    public List<Product> getAllDrinks() {
-        return productService.getAllDrinks();
-    }
 
     @PostMapping("/buy")
     public String buyDrink(Long userId, Long productId, int amount){

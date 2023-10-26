@@ -19,7 +19,7 @@ public class AuthenticationService {
     public void registerUser(UserRegistrationDTO registrationDTO) {
 
         if (userRepository.existsByName(registrationDTO.getName())) {
-            throw new Error("Username already exists");
+            throw new Error("User already exists");
         }
 
         User user = User

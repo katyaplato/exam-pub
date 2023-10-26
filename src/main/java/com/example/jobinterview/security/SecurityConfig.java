@@ -21,12 +21,14 @@ public class SecurityConfig {
         http
                 .authorizeRequests((authorizeRequests) ->
                         authorizeRequests
-                                .requestMatchers("/api/auth/**").permitAll()
+                                .requestMatchers("/api/auth/registration").permitAll()
+                                .requestMatchers("/api/auth/login").permitAll()
                                 .requestMatchers("/**").hasRole("USER")
                                 .requestMatchers("/api/summary/**")
                                 .hasRole("WAITER")
                 )
                 .httpBasic(withDefaults());
+
         return http.build();
     }
 

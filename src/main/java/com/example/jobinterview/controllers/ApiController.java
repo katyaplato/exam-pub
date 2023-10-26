@@ -4,18 +4,19 @@ import com.example.jobinterview.dtos.UserDTO;
 import com.example.jobinterview.models.Product;
 import com.example.jobinterview.services.ProductService;
 import com.example.jobinterview.services.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 @RestController
 @RequestMapping("/api")
+@AllArgsConstructor
 public class ApiController {
+
     UserService userService;
+
     ProductService drinkService;
 
     @GetMapping("/hello")
@@ -30,7 +31,6 @@ public class ApiController {
 
     @GetMapping("/users/{userId}")
     public UserDTO getUserById(@PathVariable("userId") Long id) {
-
         return new UserDTO(userService.getUserById(id).getBody());
     }
 
@@ -39,5 +39,8 @@ public class ApiController {
         return drinkService.getAllDrinks();
     }
 
+    @PostMapping("/buy")
+    public String buyDrink(Long userId, Long productId){
 
+    }
 }

@@ -14,13 +14,4 @@ public class UserDTO {
     private boolean isAdult;
     private double pocket;
     private List<Order> orders;
-
-    public UserDTO(User user){
-        this.id = user.getId();
-        this.name = user.getName();
-        this.isActive = user.isActive();
-        this.isAdult = user.isAdult();
-        this.pocket = user.getPocket();
-        this.orders = user.getOrders();
-    }
 }

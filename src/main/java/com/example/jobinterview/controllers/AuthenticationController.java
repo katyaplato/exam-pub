@@ -1,5 +1,6 @@
 package com.example.jobinterview.controllers;
 
+import com.example.jobinterview.dtos.UserLoginDTO;
 import com.example.jobinterview.dtos.UserRegistrationDTO;
 import com.example.jobinterview.services.AuthenticationService;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,7 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserLoginDTO loginDTO) {
+        authenticationService.loginUser(loginDTO);
         return ResponseEntity.ok().build();
     }
 }

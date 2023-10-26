@@ -26,8 +26,5 @@ public class ApiController {
 
 
 
-    @PostMapping("/buy")
-    public String buyDrink(Long userId, Long productId, int amount){
-        return productService.buyProduct(userId, productId, amount);
-    }
+
 }

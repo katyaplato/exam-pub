@@ -1,8 +1,10 @@
 package com.example.jobinterview.services;
 
 import com.example.jobinterview.dtos.SummaryAllDTO;
+import com.example.jobinterview.dtos.SummaryProductDTO;
 import com.example.jobinterview.models.Order;
 import com.example.jobinterview.models.Product;
+import com.example.jobinterview.models.User;
 import com.example.jobinterview.repositories.OrderRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -34,5 +36,24 @@ public class OrderServiceImpl implements OrderService {
             summary.add(summaryAllDTO);
         }
         return summary;
+    }
+
+    @Override
+    public List<SummaryProductDTO> getSummaryProduct() {
+        List<Order> allOrders = orderRepository.findAll();
+        List<SummaryProductDTO> productSummary = new ArrayList<>();
+
+        for (Order order : allOrders) {
+            User user = order.getUser();
+            SummaryProductDTO summaryProductDTO = SummaryProductDTO
+                    .builder()
+                    .userId(user.getId())
+                    .amount(order.getAmount())
+                    .price(order.getPrice())
+                    .build();
+
+            productSummary.add(summaryProductDTO);
+        }
+        return productSummary;
     }
 }

@@ -2,6 +2,7 @@ package com.example.jobinterview.controllers;
 
 import com.example.jobinterview.dtos.SummaryAllDTO;
 import com.example.jobinterview.dtos.SummaryProductDTO;
+import com.example.jobinterview.dtos.SummaryUserDTO;
 import com.example.jobinterview.services.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,4 +28,8 @@ public class SummaryController {
         return orderService.getSummaryProduct();
     }
 
+    @GetMapping("/user")
+    public List<SummaryUserDTO> getSummaryUser(){
+        return orderService.getSummaryUser();
+    }
 }

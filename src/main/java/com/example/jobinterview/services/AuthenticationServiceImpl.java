@@ -5,7 +5,6 @@ import com.example.jobinterview.dtos.UserRegistrationDTO;
 import com.example.jobinterview.models.User;
 import com.example.jobinterview.repositories.UserRepository;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

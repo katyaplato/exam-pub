@@ -1,7 +1,6 @@
 package com.example.jobinterview.controllers;
 
 import com.example.jobinterview.services.OrderService;
-import com.example.jobinterview.services.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

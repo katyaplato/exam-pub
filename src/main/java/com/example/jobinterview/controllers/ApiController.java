@@ -2,8 +2,8 @@ package com.example.jobinterview.controllers;
 
 import com.example.jobinterview.dtos.UserDTO;
 import com.example.jobinterview.models.Product;
-import com.example.jobinterview.services.ProductService;
-import com.example.jobinterview.services.UserService;
+import com.example.jobinterview.services.ProductServiceImpl;
+import com.example.jobinterview.services.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,9 +15,9 @@ import java.util.List;
 @AllArgsConstructor
 public class ApiController {
 
-    UserService userService;
+    UserServiceImpl userService;
 
-    ProductService productService;
+    ProductServiceImpl productService;
 
     @GetMapping("/hello")
     public String hello() {

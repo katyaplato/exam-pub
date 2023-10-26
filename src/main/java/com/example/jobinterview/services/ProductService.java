@@ -3,6 +3,7 @@ package com.example.jobinterview.services;
 import com.example.jobinterview.models.Product;
 import com.example.jobinterview.repositories.DrinkRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +21,9 @@ public class ProductService {
         return allDrinks;
     }
 
-//    public Product buyProduct(Product product){
-//
-//    }
+//    public Product buyProduct(Product product, User user){
+//        if(product.isForAdult()){
+//            if()
+//        }
+//   }
 }

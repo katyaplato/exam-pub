@@ -18,6 +18,10 @@ import java.util.List;
 public class ApiController {
     UserService userService;
     ProductService drinkService;
+    @GetMapping("/hello")
+    public String hello(){
+        return "Hello Kate:)";
+    }
 
     @GetMapping("/users")
     public List<?> getAllUsers() {

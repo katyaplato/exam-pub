@@ -15,16 +15,31 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests().requestMatchers("/**").hasRole("USER").and().httpBasic();
+        http
+                .authorizeRequests()
+                .requestMatchers("api/**")
+                .hasRole("USER")
+                .requestMatchers("api/summary/**")
+                .hasRole("WAITER")
+                .and()
+                .httpBasic();
         return http.build();
     }
+
     @Bean
-    public InMemoryUserDetailsManager userDetails(){
+    public InMemoryUserDetailsManager userDetails() {
         UserDetails user = User.withDefaultPasswordEncoder()
                 .username("user")
                 .password("1234")
                 .roles("USER")
                 .build();
-        return new InMemoryUserDetailsManager(user);
+
+        UserDetails waiter = User.withDefaultPasswordEncoder()
+                .username("waiter")
+                .password("1234")
+                .roles("WAITER")
+                .build();
+
+        return new InMemoryUserDetailsManager(user, waiter);
     }
 }

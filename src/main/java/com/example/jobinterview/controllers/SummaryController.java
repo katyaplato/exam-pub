@@ -1,6 +1,7 @@
 package com.example.jobinterview.controllers;
 
 import com.example.jobinterview.dtos.SummaryAllDTO;
+import com.example.jobinterview.dtos.SummaryProductDTO;
 import com.example.jobinterview.services.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,5 +22,9 @@ public class SummaryController {
         return orderService.getSummaryAll();
     }
 
+    @GetMapping("/product")
+    public List<SummaryProductDTO> getProductSummary(){
+        return orderService.getSummaryProduct();
+    }
 
 }

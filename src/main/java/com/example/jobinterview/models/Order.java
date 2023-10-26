@@ -6,6 +6,7 @@ import lombok.*;
 @Entity
 @Table(name = "ORDERS")
 @Data
+@Builder
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,4 +17,7 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public Order() {
+    }
 }

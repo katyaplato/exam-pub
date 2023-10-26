@@ -17,7 +17,7 @@ public class ApiController {
 
     UserService userService;
 
-    ProductService drinkService;
+    ProductService productService;
 
     @GetMapping("/hello")
     public String hello() {
@@ -36,11 +36,11 @@ public class ApiController {
 
     @GetMapping("/drinks")
     public List<Product> getAllDrinks() {
-        return drinkService.getAllDrinks();
+        return productService.getAllDrinks();
     }
 
     @PostMapping("/buy")
-    public String buyDrink(Long userId, Long productId){
-
+    public String buyDrink(Long userId, Long productId, int amount){
+        return productService.buyProduct(userId, productId, amount);
     }
 }

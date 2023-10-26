@@ -1,7 +1,9 @@
 package com.example.jobinterview.services;
 
+import com.example.jobinterview.models.Order;
 import com.example.jobinterview.models.Product;
 import com.example.jobinterview.models.User;
+import com.example.jobinterview.repositories.OrderRepository;
 import com.example.jobinterview.repositories.ProductRepository;
 import com.example.jobinterview.repositories.UserRepository;
 import lombok.AllArgsConstructor;
@@ -16,6 +18,7 @@ import java.util.Optional;
 public class ProductService {
     ProductRepository productRepository;
     UserRepository userRepository;
+    OrderRepository orderRepository;
 
     public List<Product> getAllDrinks() {
         List<Product> allDrinks = productRepository.findAll();
@@ -25,7 +28,7 @@ public class ProductService {
         return allDrinks;
     }
 
-    public String buyProduct(Long userId, Long productId) {
+    public String buyProduct(Long userId, Long productId, int amount) {
 
         Optional<User> maybeUser = userRepository.findById(userId);
         Optional<Product> maybeProduct = productRepository.findById(productId);
@@ -42,11 +45,23 @@ public class ProductService {
         if (product.isForAdult()) {
             if (!user.isAdult()){
                 throw new Error("You are not allowed to drink alcohol!");
-            } else if(user.getPocket() < product.getPrice()){
+            } else if(user.getPocket() < (product.getPrice() * amount)){
                 throw new Error("You cannot afford it.");
             }
         }
+
         user.setPocket(user.getPocket() - product.getPrice());
-        user.getOrders().add(product);
+
+        Order order = Order
+                .builder()
+                .productName(product.getProductName())
+                .amount(amount)
+                .price(product.getPrice() * amount)
+                .user(user)
+                .build();
+
+        user.getOrders().add(order);
+
+        return "Have a nice evening.";
     }
 }

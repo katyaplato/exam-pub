@@ -2,7 +2,7 @@ package com.example.jobinterview.controllers;
 
 import com.example.jobinterview.dtos.UserLoginDTO;
 import com.example.jobinterview.dtos.UserRegistrationDTO;
-import com.example.jobinterview.services.AuthenticationService;
+import com.example.jobinterview.services.AuthenticationServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class AuthenticationController {
 
-    private AuthenticationService authenticationService;
+    private AuthenticationServiceImpl authenticationService;
 
     @PostMapping("/registration")
     public ResponseEntity<?> register(@RequestBody UserRegistrationDTO registrationDTO) {

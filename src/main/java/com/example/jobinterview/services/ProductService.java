@@ -43,9 +43,9 @@ public class ProductService {
         User user = maybeUser.get();
 
         if (product.isForAdult()) {
-            if (!user.isAdult()){
+            if (!user.isAdult()) {
                 throw new Error("You are not allowed to drink alcohol!");
-            } else if(user.getPocket() < (product.getPrice() * amount)){
+            } else if (user.getPocket() < (product.getPrice() * amount)) {
                 throw new Error("You cannot afford it.");
             }
         }

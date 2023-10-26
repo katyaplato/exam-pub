@@ -22,4 +22,7 @@ public class User {
     private Role role;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Order> orders;
+
+    public User() {
+    }
 }

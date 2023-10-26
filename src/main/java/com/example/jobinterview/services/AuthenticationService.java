@@ -1,5 +1,6 @@
 package com.example.jobinterview.services;
 
+import com.example.jobinterview.dtos.UserLoginDTO;
 import com.example.jobinterview.dtos.UserRegistrationDTO;
 import com.example.jobinterview.repositories.UserRepository;
 import lombok.AllArgsConstructor;

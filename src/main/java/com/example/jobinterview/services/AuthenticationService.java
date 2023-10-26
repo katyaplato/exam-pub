@@ -6,7 +6,6 @@ import com.example.jobinterview.models.User;
 import com.example.jobinterview.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -17,9 +16,6 @@ import java.util.Optional;
 public class AuthenticationService {
     private UserRepository userRepository;
 
-
-    private PasswordEncoder passwordEncoder;
-
     public void registerUser(UserRegistrationDTO registrationDTO) {
 
         if (userRepository.existsByName(registrationDTO.getName())) {
@@ -29,14 +25,15 @@ public class AuthenticationService {
 
         User user = new User();
         user.setName(registrationDTO.getName());
-        user.setPassword(passwordEncoder.encode(registrationDTO.getPassword()));
-        user.setIsAdult(registrationDTO.isAdult());
+        user.setPassword(registrationDTO.getPassword());
+        user.setAdult(registrationDTO.isAdult());
+        user.setPocket(registrationDTO.getPocket());
 
 
         userRepository.save(user);
     }
 
-    public String loginUser(UserLoginDTO loginDTO) {
+    public void loginUser(UserLoginDTO loginDTO) {
 
         Optional<User> maybeUser = userRepository.findByName(loginDTO.getName());
         if (maybeUser.isEmpty()) {
@@ -45,8 +42,7 @@ public class AuthenticationService {
         User user = maybeUser.get();
 
 
-        if (passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) {
-            return "Logged in successfully.";
+        if (loginDTO.getPassword().equals(user.getPassword())) {
         } else {
             throw new Error("Wrong password.");
         }

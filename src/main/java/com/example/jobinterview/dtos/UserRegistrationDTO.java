@@ -7,4 +7,5 @@ public class UserRegistrationDTO {
     private String name;
     private String password;
     private boolean isAdult;
+    private double pocket;
 }

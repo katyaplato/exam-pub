@@ -15,7 +15,7 @@ import java.util.List;
 public interface ProductController {
     @GetMapping("/drink-menu")
     @Operation(summary = "Get request to get the list of all products",
-            description = "Retrieve a drinks menu with items. If there is not drinks in menu, you will get the error.")
+            description = "Retrieve a drinks menu with items. If there are not drinks in menu, you will get an error.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User successfully get a list"),
             @ApiResponse(responseCode = "400", description = "User cannot see any product because the list is empty.")

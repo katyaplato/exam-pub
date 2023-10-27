@@ -18,7 +18,7 @@ jobs:
           distribution: 'adopt'
 
       - name: Make Gradlew executable
-        run: chmod +x gradlew
+        run: chmod +x src/gradlew
 
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@ccb4328a959376b642e027874838f60f8e596de3
@@ -26,5 +26,5 @@ jobs:
         uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
         with:
           arguments: build
-          build-root-directory: src
+        
 

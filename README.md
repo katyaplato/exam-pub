@@ -12,3 +12,5 @@ technologies and practices:
 **Model** represented by **Models**, **View** is represented by **Controllers**,
 and **Controller** is represented by **Services**
 - **Basic Authentication** (Spring Security)
+- **Data Model**
+![data-model.png](data-model.png)

@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/orders")
 @AllArgsConstructor
-public class OrderControllerImpl {
+public class OrderControllerImpl implements OrderController {
 
     OrderService orderService;
 
+    @Override
     @PostMapping("/buy")
     public String buyDrink(Long userId, Long productId, int amount) {
         return orderService.buyProduct(userId, productId, amount);

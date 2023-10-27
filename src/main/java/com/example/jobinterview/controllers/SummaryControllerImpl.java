@@ -5,6 +5,7 @@ import com.example.jobinterview.dtos.SummaryProductDTO;
 import com.example.jobinterview.dtos.SummaryUserDTO;
 import com.example.jobinterview.services.OrderService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,19 +21,19 @@ public class SummaryControllerImpl implements SummaryController {
 
     @Override
     @GetMapping("/all")
-    public List<SummaryAllDTO> getAllSummary() {
+    public ResponseEntity<List<SummaryAllDTO>> getAllSummary() {
         return orderService.getSummaryAll();
     }
 
     @Override
     @GetMapping("/product")
-    public List<SummaryProductDTO> getProductSummary() {
+    public ResponseEntity<List<SummaryProductDTO>> getProductSummary() {
         return orderService.getSummaryProduct();
     }
 
     @Override
     @GetMapping("/user")
-    public List<SummaryUserDTO> getSummaryUser() {
+    public ResponseEntity<List<SummaryUserDTO>> getSummaryUser() {
         return orderService.getSummaryUser();
     }
 }

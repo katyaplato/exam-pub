@@ -10,6 +10,7 @@ import com.example.jobinterview.repositories.OrderRepository;
 import com.example.jobinterview.repositories.ProductRepository;
 import com.example.jobinterview.repositories.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class OrderServiceImpl implements OrderService {
     ProductRepository productRepository;
 
     @Override
-    public List<SummaryAllDTO> getSummaryAll() {
+    public ResponseEntity<List<SummaryAllDTO>> getSummaryAll() {
         List<Order> allOrders = orderRepository.findAll();
         List<SummaryAllDTO> summary = new ArrayList<>();
 
@@ -41,11 +42,11 @@ public class OrderServiceImpl implements OrderService {
 
             summary.add(summaryAllDTO);
         }
-        return summary;
+        return ResponseEntity.ok(summary);
     }
 
     @Override
-    public List<SummaryProductDTO> getSummaryProduct() {
+    public ResponseEntity<List<SummaryProductDTO>> getSummaryProduct() {
         List<Order> allOrders = orderRepository.findAll();
         List<SummaryProductDTO> productSummary = new ArrayList<>();
 
@@ -60,11 +61,11 @@ public class OrderServiceImpl implements OrderService {
 
             productSummary.add(summaryProductDTO);
         }
-        return productSummary;
+        return ResponseEntity.ok(productSummary);
     }
 
     @Override
-    public List<SummaryUserDTO> getSummaryUser() {
+    public ResponseEntity<List<SummaryUserDTO>> getSummaryUser() {
         List<Order> allOrders = orderRepository.findAll();
         List<SummaryUserDTO> summaryUser = new ArrayList<>();
 
@@ -80,7 +81,7 @@ public class OrderServiceImpl implements OrderService {
                     .build();
             summaryUser.add(summaryUserDTO);
         }
-        return summaryUser;
+        return ResponseEntity.ok(summaryUser);
     }
 
     @Override

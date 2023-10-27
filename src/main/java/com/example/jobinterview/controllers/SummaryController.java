@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,7 +22,7 @@ public interface SummaryController {
             @ApiResponse(responseCode = "200", description = "User successfully get a summary"),
             @ApiResponse(responseCode = "400", description = "User cannot see any summary")
     })
-    List<SummaryAllDTO> getAllSummary();
+    ResponseEntity<List<SummaryAllDTO>> getAllSummary();
 
     @GetMapping("/product")
     @Operation(summary = "Retrieve all orders for a specific drink for each drink")
@@ -29,7 +30,7 @@ public interface SummaryController {
             @ApiResponse(responseCode = "200", description = "User successfully get a summary"),
             @ApiResponse(responseCode = "400", description = "User cannot see any summary")
     })
-    List<SummaryProductDTO> getProductSummary();
+    ResponseEntity<List<SummaryProductDTO>> getProductSummary();
 
     @GetMapping("/user")
     @Operation(summary = "Retrieve all orders for a specific user across all users")
@@ -37,5 +38,5 @@ public interface SummaryController {
             @ApiResponse(responseCode = "200", description = "User successfully get a summary"),
             @ApiResponse(responseCode = "400", description = "User cannot see any summary")
     })
-    List<SummaryUserDTO> getSummaryUser();
+    ResponseEntity<List<SummaryUserDTO>> getSummaryUser();
 }

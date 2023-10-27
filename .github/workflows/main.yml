@@ -25,4 +25,4 @@ jobs:
         with:
           arguments: build
           build-root-directory: src
-          gradle-version: 8.1.1
+         

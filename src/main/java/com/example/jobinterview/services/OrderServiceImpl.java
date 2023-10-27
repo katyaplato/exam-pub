@@ -10,7 +10,10 @@ import com.example.jobinterview.repositories.OrderRepository;
 import com.example.jobinterview.repositories.ProductRepository;
 import com.example.jobinterview.repositories.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,7 +28,7 @@ public class OrderServiceImpl implements OrderService {
     ProductRepository productRepository;
 
     @Override
-    public ResponseEntity<List<SummaryAllDTO>> getSummaryAll() {
+    public ResponseEntity<?> getSummaryAll() {
         try {
             List<Order> allOrders = orderRepository.findAll();
             List<SummaryAllDTO> summary = new ArrayList<>();
@@ -44,13 +47,13 @@ public class OrderServiceImpl implements OrderService {
                 summary.add(summaryAllDTO);
             }
             return ResponseEntity.ok(summary);
-        } catch (Exception e){
-            return ResponseEntity.internalServerError().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
     @Override
-    public ResponseEntity<List<SummaryProductDTO>> getSummaryProduct() {
+    public ResponseEntity<?> getSummaryProduct() {
         try {
             List<Order> allOrders = orderRepository.findAll();
             List<SummaryProductDTO> productSummary = new ArrayList<>();
@@ -67,13 +70,13 @@ public class OrderServiceImpl implements OrderService {
                 productSummary.add(summaryProductDTO);
             }
             return ResponseEntity.ok(productSummary);
-        } catch (Exception e){
-            return ResponseEntity.internalServerError().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
     @Override
-    public ResponseEntity<List<SummaryUserDTO>> getSummaryUser() {
+    public ResponseEntity<?> getSummaryUser() {
         try {
             List<Order> allOrders = orderRepository.findAll();
             List<SummaryUserDTO> summaryUser = new ArrayList<>();
@@ -92,46 +95,53 @@ public class OrderServiceImpl implements OrderService {
             }
             return ResponseEntity.ok(summaryUser);
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().build();
+           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
 
-        @Override
-        public String buyProduct (Long userId, Long productId,int amount){
+    @Override
+    public String buyProduct(Long userId, Long productId, int amount) {
 
-            Optional<User> maybeUser = userRepository.findById(userId);
-            Optional<Product> maybeProduct = productRepository.findById(productId);
+//         we also can check if isAdult == true by getting this property from authorized user
+//
+//            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//            String userName = userDetails.getUsername();
+//            Optional<User> user = userRepository.findByName(userName);
+//            Long userId = user.get().getId();
 
-            if (maybeUser.isEmpty()) {
-                throw new Error("A User with such ID does not exist.");
-            } else if (maybeProduct.isEmpty()) {
-                throw new Error("A drink with such ID does not exist.");
-            }
+        Optional<User> maybeUser = userRepository.findById(userId);
+        Optional<Product> maybeProduct = productRepository.findById(productId);
 
-            Product product = maybeProduct.get();
-            User user = maybeUser.get();
-
-            if (product.isForAdult()) {
-                if (!user.isAdult()) {
-                    throw new Error("You are not allowed to drink alcohol!");
-                } else if (user.getPocket() < (product.getPrice() * amount)) {
-                    throw new Error("You cannot afford it.");
-                }
-            }
-
-            user.setPocket(user.getPocket() - product.getPrice());
-
-            Order order = Order
-                    .builder()
-                    .product(product)
-                    .amount(amount)
-                    .price(product.getPrice() * amount)
-                    .user(user)
-                    .build();
-
-            user.getOrders().add(order);
-
-            return "Have a nice evening.";
+        if (maybeUser.isEmpty()) {
+            throw new Error("A User with such ID does not exist.");
+        } else if (maybeProduct.isEmpty()) {
+            throw new Error("A drink with such ID does not exist.");
         }
+
+        Product product = maybeProduct.get();
+        User user = maybeUser.get();
+
+        if (product.isForAdult()) {
+            if (!user.isAdult()) {
+                throw new Error("You are not allowed to drink alcohol!");
+            } else if (user.getPocket() < (product.getPrice() * amount)) {
+                throw new Error("You cannot afford it.");
+            }
+        }
+
+        user.setPocket(user.getPocket() - product.getPrice());
+
+        Order order = Order
+                .builder()
+                .product(product)
+                .amount(amount)
+                .price(product.getPrice() * amount)
+                .user(user)
+                .build();
+
+        user.getOrders().add(order);
+
+        return "Have a nice evening.";
     }
+}

@@ -21,19 +21,19 @@ public class SummaryControllerImpl implements SummaryController {
 
     @Override
     @GetMapping("/all")
-    public ResponseEntity<List<SummaryAllDTO>> getAllSummary() {
+    public ResponseEntity<?> getAllSummary() {
         return orderService.getSummaryAll();
     }
 
     @Override
     @GetMapping("/product")
-    public ResponseEntity<List<SummaryProductDTO>> getProductSummary() {
+    public ResponseEntity<?> getProductSummary() {
         return orderService.getSummaryProduct();
     }
 
     @Override
     @GetMapping("/user")
-    public ResponseEntity<List<SummaryUserDTO>> getSummaryUser() {
+    public ResponseEntity<?> getSummaryUser() {
         return orderService.getSummaryUser();
     }
 }

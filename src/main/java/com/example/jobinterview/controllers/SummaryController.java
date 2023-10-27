@@ -22,7 +22,7 @@ public interface SummaryController {
             @ApiResponse(responseCode = "200", description = "User successfully get a summary"),
             @ApiResponse(responseCode = "400", description = "User cannot see any summary")
     })
-    ResponseEntity<List<SummaryAllDTO>> getAllSummary();
+    ResponseEntity<?> getAllSummary();
 
     @GetMapping("/product")
     @Operation(summary = "Retrieve all orders for a specific drink for each drink")
@@ -30,7 +30,7 @@ public interface SummaryController {
             @ApiResponse(responseCode = "200", description = "User successfully get a summary"),
             @ApiResponse(responseCode = "400", description = "User cannot see any summary")
     })
-    ResponseEntity<List<SummaryProductDTO>> getProductSummary();
+    ResponseEntity<?> getProductSummary();
 
     @GetMapping("/user")
     @Operation(summary = "Retrieve all orders for a specific user across all users")
@@ -38,5 +38,5 @@ public interface SummaryController {
             @ApiResponse(responseCode = "200", description = "User successfully get a summary"),
             @ApiResponse(responseCode = "400", description = "User cannot see any summary")
     })
-    ResponseEntity<List<SummaryUserDTO>> getSummaryUser();
+    ResponseEntity<?> getSummaryUser();
 }

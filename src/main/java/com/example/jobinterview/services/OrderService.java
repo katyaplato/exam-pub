@@ -8,8 +8,8 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface OrderService {
-    ResponseEntity<List<SummaryAllDTO>> getSummaryAll();
-    ResponseEntity<List<SummaryProductDTO>> getSummaryProduct();
-    ResponseEntity<List<SummaryUserDTO>> getSummaryUser();
+    ResponseEntity<?> getSummaryAll();
+    ResponseEntity<?> getSummaryProduct();
+    ResponseEntity<?> getSummaryUser();
     String buyProduct(Long userId, Long productId, int amount);
 }

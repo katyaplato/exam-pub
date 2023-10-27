@@ -12,9 +12,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/products")
 @AllArgsConstructor
-public class ProductsControllerImpl {
+public class ProductsControllerImpl implements ProductController {
     ProductService productService;
 
+    @Override
     @GetMapping("/drink-menu")
     public List<Product> getAllDrinks() {
         return productService.getAllDrinks();

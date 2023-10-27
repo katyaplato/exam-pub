@@ -9,8 +9,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Tag(name = "Authentication controller", description = "API to handle registration and login")
+@RequestMapping("/api/auth")
 public interface AuthenticationController {
     @PostMapping("/registration")
     @Operation(summary = "Post request to register new user",

@@ -13,14 +13,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 @AllArgsConstructor
-public class UserControllerImpl {
+public class UserControllerImpl implements UserController {
     UserService userService;
 
+    @Override
     @GetMapping("/")
     public List<?> getAllUsers() {
         return userService.getAllUsers();
     }
 
+    @Override
     @GetMapping("/{userId}")
     public UserDTO getUserById(@PathVariable("userId") Long id) {
         return new UserDTO(userService.getUserById(id).getBody());

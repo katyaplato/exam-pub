@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface OrderController {
     @PostMapping("/buy")
     @Operation(summary = "Post request to buy a drink/creating an order",
-            description = "Enter your name and password to register a new user. " +
+            description = "Enter user id, product id, and amount of product you want to get." +
                     "If the the drink is for adult but the user is not adult or if the user does not have enough money to buy the product" +
                     " you will get an error message.")
     @ApiResponses(value = {

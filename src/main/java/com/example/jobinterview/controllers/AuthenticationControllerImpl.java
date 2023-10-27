@@ -13,16 +13,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/auth")
 @AllArgsConstructor
-public class AuthenticationControllerImpl {
+public class AuthenticationControllerImpl implements AuthenticationController {
 
     private AuthenticationServiceImpl authenticationService;
 
+    @Override
     @PostMapping("/registration")
     public ResponseEntity<?> register(@RequestBody UserRegistrationDTO registrationDTO) {
         authenticationService.registerUser(registrationDTO);
         return ResponseEntity.ok().build();
     }
 
+    @Override
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserLoginDTO loginDTO) {
         authenticationService.loginUser(loginDTO);

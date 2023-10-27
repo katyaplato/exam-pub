@@ -18,7 +18,7 @@ public interface ProductController {
             description = "Retrieve a drinks menu with items. If there are not drinks in menu, you will get an error.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User successfully get a list"),
-            @ApiResponse(responseCode = "400", description = "User cannot see any product because the list is empty.")
+            @ApiResponse(responseCode = "404", description = "User cannot see any product because the list is empty.")
     })
     List<Product> getAllDrinks();
 }

@@ -5,7 +5,11 @@ import com.example.jobinterview.dtos.UserRegistrationDTO;
 import com.example.jobinterview.models.User;
 import com.example.jobinterview.repositories.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpStatusCodeException;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
@@ -36,14 +40,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         Optional<User> maybeUser = userRepository.findByName(loginDTO.getName());
         if (maybeUser.isEmpty()) {
-            throw new Error("User not found.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found.");
         }
         User user = maybeUser.get();
 
-
         if (loginDTO.getPassword().equals(user.getPassword())) {
         } else {
-            throw new Error("Wrong password.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid password");
         }
     }
 }

@@ -12,9 +12,8 @@ import com.example.jobinterview.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,9 +113,9 @@ public class OrderServiceImpl implements OrderService {
         Optional<Product> maybeProduct = productRepository.findById(productId);
 
         if (maybeUser.isEmpty()) {
-            throw new Error("A User with such ID does not exist.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "A User with such ID does not exist.");
         } else if (maybeProduct.isEmpty()) {
-            throw new Error("A drink with such ID does not exist.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "A drink with such ID does not exist.");
         }
 
         Product product = maybeProduct.get();
@@ -124,9 +123,9 @@ public class OrderServiceImpl implements OrderService {
 
         if (product.isForAdult()) {
             if (!user.isAdult()) {
-                throw new Error("You are not allowed to drink alcohol!");
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You are not allowed to drink alcohol!");
             } else if (user.getPocket() < (product.getPrice() * amount)) {
-                throw new Error("You cannot afford it.");
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You cannot afford it.");
             }
         }
 
